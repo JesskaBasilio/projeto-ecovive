@@ -16,5 +16,10 @@ mongoose
         console.log(`✅ Servidor rodando na porta ${PORT}`)
     })
     console.log("✅ Conectou ao banco!")
-}).catch((err) => console.log("❌ Erro de conexão com o Banco: ", err))
+}).catch((err) => {
+    console.log("❌ Erro de conexão com o Banco: ", err.message)
+    process.exit(1) //encerra a conexão com o servidor imediatamente se o banco não rodar,
+                    //não faz sentido continuar rodando a API
+})
+
 
