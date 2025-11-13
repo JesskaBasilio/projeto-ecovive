@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000
 
 mongoose
 .connect(
-    `mongodb+srv://${dbUser}:${dbPassword}@cluster0.bw4tb0b.mongodb.net/?appName=Cluster0`
+    `mongodb+srv://${dbUser}:${dbPassword}@cluster0.bw4tb0b.mongodb.net/authjwt?retryWrites=true&w=majority`
 )
 .then(() => {
     app.listen(PORT, () => {
