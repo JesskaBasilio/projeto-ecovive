@@ -1,35 +1,43 @@
-const mongoose = require('mongoose')
+import { Schema, model, Document } from 'mongoose'
 
-const userSchema = new mongoose.Schema({
-  document: {
+export interface IUser extends Document {
+  document: string;
+  name: string;
+  email: string;
+  password: string;
+  confirmpassword?: string;
+}
+
+const userSchema = new Schema<IUser>(
+  {
+    document: {
     type: String,
     required: true,
     unique: true,
     trim: true
   },
-  name: {
+    name: {
     type: String,
     required: true,
     trim: true,
     minlength: 2
   },
-  email: {
+    email: {
     type: String,
     required: true,
     unique: true,
     lowercase: true,
     trim: true
   },
-  password: {
+    password: {
     type: String,
     required: true
   },
-  confirmpassword: {
+    confirmpassword: {
     type: String,
     select: false //Prevents it from being returned in queries
   }
 }, { timestamps: true }) // Automatically creates createdAt and updatedAt
 
-const User = mongoose.model('User', userSchema)
-
-module.exports = User
+const User = model<IUser>('User', userSchema)
+export default User

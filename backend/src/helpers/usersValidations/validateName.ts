@@ -1,4 +1,4 @@
-function validateName(name) {
+export function validateName(name: string): boolean {
   if (!name) return false;               // Obrigatório
   name = name.trim();                     // Remove espaços no início/fim
   if (name.length < 2 || name.length > 100) return false; // Tamanho mínimo/máximo
@@ -13,13 +13,3 @@ function validateName(name) {
 
   return true;
 }
-
-module.exports = { validateName };
-
-
-
-
-
-  
-
- 

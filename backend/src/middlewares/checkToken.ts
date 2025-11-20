@@ -1,16 +1,17 @@
-const jwt = require('jsonwebtoken')
+import { Request, Response, NextFunction } from "express"
+import jwt from 'jsonwebtoken'
 
-exports.checkToken = (req, res, next) => {
+export const checkToken = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers['authorization']
   const token = authHeader && authHeader.split(' ')[1]
 
   if (!token) return res.status(401).json({ msg: 'Acesso negado!' })
 
   try {
-    const secret = process.env.SECRET
+    const secret = process.env.SECRET as string
     jwt.verify(token, secret)
     next()
-  } catch (err) {
+  } catch (error) {
     res.status(400).json({ msg: 'Token inválido!' })
   }
 }

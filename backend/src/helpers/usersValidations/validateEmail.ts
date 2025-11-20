@@ -1,4 +1,4 @@
-function validateEmail(email) {
+export function validateEmail(email: string): boolean {
   if (!email) return false;               // Campo obrigatório
   email = email.trim().toLowerCase();     // Remove espaços e padroniza
 
@@ -13,4 +13,3 @@ function validateEmail(email) {
   return true;
 }
 
-module.exports = { validateEmail };

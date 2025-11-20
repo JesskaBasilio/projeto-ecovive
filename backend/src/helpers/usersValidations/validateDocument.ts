@@ -1,4 +1,4 @@
-function isValidCPF(cpf) {
+export function isValidCPF(cpf: string) {
   cpf = cpf.replace(/[^\d]+/g, '');
   if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
   let soma = 0, resto;
@@ -15,7 +15,7 @@ function isValidCPF(cpf) {
   return resto === parseInt(cpf.substring(10, 11));
 }
 
-function isValidCNPJ(cnpj) {
+export function isValidCNPJ(cnpj: string) {
   cnpj = cnpj.replace(/[^\d]+/g, '');
   if (cnpj.length !== 14 || /^(\d)\1+$/.test(cnpj)) return false;
 
@@ -30,7 +30,8 @@ function isValidCNPJ(cnpj) {
     if (pos < 2) pos = 9;
   }
   let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-  if (resultado != digitos.charAt(0)) return false;
+  if (resultado !== parseInt(digitos.charAt(0), 10)) return false;
+
 
   tamanho++;
   numeros = cnpj.substring(0, tamanho);
@@ -41,16 +42,14 @@ function isValidCNPJ(cnpj) {
     if (pos < 2) pos = 9;
   }
   resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-  return resultado == digitos.charAt(1);
+  return resultado === parseInt(digitos.charAt(1), 10);
 }
 
-function validateDocument(value) {
-  if (!value) return { valid: false};
+export function validateDocument(value: string) {
+  if (!value) return { valid: false };
 
   const digits = value.replace(/[^\d]+/g, '');
-  if (digits.length === 11) return { valid: isValidCPF(digits), type: 'cpf'};
-  if (digits.length === 14) return { valid: isValidCNPJ(digits), type: 'cnpj'};
-  return { valid: false};
+  if (digits.length === 11) return { valid: isValidCPF(digits), type: 'cpf' as const };
+  if (digits.length === 14) return { valid: isValidCNPJ(digits), type: 'cnpj' as const };
+  return { valid: false };
 }
-
-module.exports = { validateDocument };
