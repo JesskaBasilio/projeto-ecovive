@@ -7,7 +7,7 @@ dotenv.config();
 //CREDENTIALS
 const dbUser = process.env.DB_USER!;
 const dbPassword = process.env.DB_PASS!;
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3636;
 
 mongoose
   .connect(
